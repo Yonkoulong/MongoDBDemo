@@ -1,0 +1,141 @@
+body {
+  
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  margin: 0;
+}
+
+.redText{
+    color: darkblue;
+    text-align: center;
+}
+
+input[type=text], select{
+  width: 30%;
+  height: 100%; 
+  padding: 12px 20px;
+  margin: 8px 0;
+  display: block;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+input[type=password], select{
+    width: 30%;
+    height: 100%; 
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: block;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+input[type=submit] {
+    width: 100px;
+    background-color: #4CAF50;
+    color: white;
+    padding: 14px 20px;
+    margin: 8px 0;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    display: inline-block;
+  }
+
+  input[type=submit]:hover {
+    background-color: #45a049;
+  }
+  
+ .form_login a {
+    width: 65px;
+    background-color: #4CAF50;
+    color: white;
+    padding: 11px 20px;
+    text-decoration: none;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    display: inline-block;
+
+    
+  }
+
+  div {
+    border-radius: 5px; 
+    padding: 20px;
+  }
+
+.header {
+  
+}
+
+.form_login{
+   height: 500px;
+}
+
+
+/* form logined */
+
+.form_main {
+  width: 400px;
+  height: 450px;
+  background-color: burlywood;
+  padding: 12px 20px;
+  margin: 8px 0;
+}
+
+.form_main ul{
+  list-style: none;
+  
+}
+
+.form_main li {
+  display: inline-block;
+  padding: 12px 20px;
+  margin: 8px 0;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+.form_main a{
+  text-decoration: none;
+}
+
+.form_main :hover li{
+  background-color: #45a049
+}
+
+.form_insert {
+   margin-top: 100px;
+   width: 800px;
+   background-image: url(../image/image_home.jpg);
+   background-repeat: no-repeat;
+   background-size: cover;
+   background-position: center;
+   color:yellowgreen;
+   font-family: 'Courier New', Courier, monospace;
+   font-size: medium;
+}
+
+.form_edit{
+  margin-top: 100px;
+  width: 800px;
+  background-color: blanchedalmond; 
+  color:yellowgreen;
+  font-family: 'Courier New', Courier, monospace;
+  font-size: medium;
+}
+
+.form_register{
+  margin-top: 100px;
+  width: 800px;
+  background-color: goldenrod; 
+  color:brown;
+  font-family: 'Courier New', Courier, monospace;
+  font-size: medium;
+}
+

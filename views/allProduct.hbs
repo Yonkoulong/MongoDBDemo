@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="css/mystyle.css">
+    <title>All Product</title>
+</head>
+
+<body>
+
+    <center>
+        <h2>{{username}}</h2>
+        <form method="POST" action="/search">
+            <input type="text" name="txtName">
+            <input type="submit" value="Search">
+        </form>
+    </center>
+
+    <table class="table table-hover" width="500px">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Price</th>
+                <th>Image</th>
+                <th>Edit</th>
+                <th>Delete</th>
+            </tr>
+        </thead>
+        <tbody>
+            {{#each model}}
+            <tr>
+
+                <td>{{name}}</td>
+                <td>{{price}}</td>
+                <td><img src="{{imgUrl}}" alt="" width="150px" height="100px"></td>
+                <td><a href="/edit?id={{_id}}">Edit</a></td>
+                <td><a href="/delete?id={{_id}}" onclick="return confirm('Are your sure?')">Delete</a></td>
+            </tr>
+            {{/each}}
+        </tbody>
+    </table>
+    <a href="/logined">Go Home</a>
+</body>
+
+</html>
