@@ -20,14 +20,15 @@
             <input type="text" name="txtName">
             <input type="submit" value="Search">
         </form>
+        <div class="image_menu">
+            <img src="image/menu.png" alt="" width="80px" height="70px">
+        </div>
     </center>
-
     <table class="table table-hover" width="500px">
         <thead>
             <tr>
                 <th>Name</th>
                 <th>Price</th>
-                <th>Image</th>
                 <th>Edit</th>
                 <th>Delete</th>
             </tr>
@@ -38,7 +39,6 @@
 
                 <td>{{name}}</td>
                 <td>{{price}}</td>
-                <td><img src="{{imgUrl}}" alt="" width="150px" height="100px"></td>
                 <td><a href="/edit?id={{_id}}">Edit</a></td>
                 <td><a href="/delete?id={{_id}}" onclick="return confirm('Are your sure?')">Delete</a></td>
             </tr>

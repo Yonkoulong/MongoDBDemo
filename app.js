@@ -120,6 +120,10 @@ app.post('/doRegister', async(req,res)=>{
     res.redirect('/'); 
 })
 
+app.get('/home' ,(req,res)=>{
+    res.render('index')
+})
+
 app.get('/insert',(req, res)=>{
     res.render('insert')
 })
