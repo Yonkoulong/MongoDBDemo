@@ -31,4 +31,18 @@ async function checkUser(nameIn,passwordIn){
         return false;
 }
 
-module.exports = {searchProduct, insertOneIntoCollection, checkUser}
+function checkName(value)
+{
+    for(var i = 0; i < value.length; i++)
+    {
+        if(value[i] < 'a' || value[i] > 'z')
+        {
+            return false;
+        }   
+    }
+    return true;
+}
+
+
+
+module.exports = {searchProduct, insertOneIntoCollection, checkUser, checkName}

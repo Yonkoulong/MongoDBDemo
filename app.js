@@ -22,7 +22,27 @@ app.use(express.static('public'))
 
 var listNotToDelete = ['polo', 'pants', 'kitchen', 'noodles'];
 
-const dbHandler = require('./databaseHandler')
+const dbHandler = require('./databaseHandler');
+const { check, validationResult } = require('express-validator');
+
+const validator = [
+    check('txtName').exists().withMessage('Please Enter UserName')
+    .notEmpty().withMessage('Username cannot be left blank')
+    .isLength({min: 6}).withMessage('Username have to from 6 characters'),
+
+    check('txtPassword').exists().withMessage('Please Enter Password')
+    .notEmpty().withMessage('Password cannot be left blank')
+    .isLength({min: 6}).withMessage('Password have to from 6 characters'),
+
+    check('txtRepassword').exists().withMessage('Please Enter Password')
+    .notEmpty().withMessage('Password cannot be left blank')
+    .custom((value, {req})=> {
+    if(value !== req.body.txtPassword){
+                throw new Error('Password do not look like')
+    }
+        return true;
+    })
+]
 
 //search accurate 
 app.post('/search' ,async (req,res)=>{
@@ -86,14 +106,47 @@ app.get('/view',async (req,res)=>{
 app.post('/doInsert', async (req,res)=>{
     const nameInput = req.body.txtName;
     const priceInput = req.body.txtPrice;
-    const imgURLInput = req.body.imgURL;
-    var newProduct = {name:nameInput, price:priceInput, imgURL:imgURLInput,size : {dai:20, rong:40}}
-    await dbHandler.insertOneIntoCollection(newProduct,"Product");
-    res.render('logined')
+    var newProduct = {name:nameInput, price:priceInput, size : {dai:20, rong:40}}
+    if(!dbHandler.checkName(nameInput))
+    {
+        res.render('insert',{nameError:'Please Enter Name Again!'})
+    }else if(dbHandler.checkName(priceInput)){
+        res.render('insert',{priceError:'Please Enter Price Again!'})
+    }else{  
+        await dbHandler.insertOneIntoCollection(newProduct,"Product");
+        res.render('logined')
+    }
+})
+
+app.get('/insert',(req, res)=>{
+    res.render('insert')
 })
 
 app.get('/register',(req,res)=>{
     res.render('register')
+})
+
+app.post('/doRegister', validator, async(req,res)=>{
+    const nameInput = req.body.txtName;
+    const passInput = req.body.txtPassword;
+    const repassInput = req.body.txtRepeatpassword;
+    const newUser = {username:nameInput,password:passInput,Repeatpassword:repassInput};
+    if(nameInput.length < 6)
+    {
+        res.render('register',{nameError:'Username have to from 6 characters'})
+    }
+    else if(passInput.length < 6)
+    {
+        res.render('register',{passError:'Password have to from 6 characters'})
+    }
+    else if(repassInput !== passInput){
+       res.render('register',{repassError:'Password do not look like'})
+    }
+    else
+    {  
+        await dbHandler.insertOneIntoCollection(newUser,"Product");
+        res.render('index')
+    }
 })
 
 app.get('/logined',(req,res)=>{
@@ -112,20 +165,8 @@ app.post('/login',async (req,res)=>{
     }
 })
 
-app.post('/doRegister', async(req,res)=>{
-    const nameInput = req.body.txtName;
-    const passInput = req.body.txtPassword;
-    const newUser = {username:nameInput,password:passInput};
-    await dbHandler.insertOneIntoCollection(newUser,"users");
-    res.redirect('/'); 
-})
-
 app.get('/home' ,(req,res)=>{
     res.render('index')
-})
-
-app.get('/insert',(req, res)=>{
-    res.render('insert')
 })
 
 app.get('/',(req, res)=>{

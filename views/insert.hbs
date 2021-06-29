@@ -13,9 +13,11 @@
     <center>
         <form action="/doInsert" method="post">
             <div class="form_insert">
-                Name <input type="text" name="txtName" placeholder="Enter Dish Name...">
+                Name <input type="text" name="txtName" placeholder="Enter Dish Name..." required>
+                <span style="color: white;" class="error">{{nameError}}</span>
                 <br>
-                Price <input type="text" name="txtPrice" placeholder="Enter Dish Price...">
+                Price <input type="text" name="txtPrice" placeholder="Enter Dish Price..." required>
+                <span style="color: white;" class="error">{{priceError}}
                 <br>
                 <input type="submit" value="Insert">
             </div>

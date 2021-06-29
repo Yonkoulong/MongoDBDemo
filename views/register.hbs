@@ -11,16 +11,25 @@
 
 <body>
     <center>
+        <h2>Registration</h2>
         <div class="form_register">
             <form action="/doRegister" method="post">
-                UserName <input type="text" name="txtName">
+                UserName <input type="text" name="txtName" required>
+                <span style="color: white;" class="error">{{nameError}}</span>
                 <br>
-                Password <input type="password" name="txtPassword">
+                Password <input type="password" name="txtPassword" required>
+                <span style="color: white;" class="error">{{passError}}</span>
                 <br>
+                Repeatpassword <input type="password" name="txtRepassword" required>
+                <span style="color: white;" class="error">{{repassError}}</span>
+
                 <input type="submit" value="Register">
             </form>
+
+          
         </div>
     </center>
+
 </body>
 
 </html>
