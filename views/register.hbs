@@ -6,30 +6,52 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="css/mystyle.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+        integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
     <title>Document</title>
 </head>
 
 <body>
     <center>
-        <h2>Registration</h2>
-        <div class="form_register">
+        <h2 class="redtext">Registration</h2>
+        {{!-- <div class="form_register">
             <form action="/doRegister" method="post">
                 UserName <input type="text" name="txtName" required>
-                <span style="color: white;" class="error">{{nameError}}</span>
+                <span style="color: white;" class="error">{{error.username}}</span>
                 <br>
                 Password <input type="password" name="txtPassword" required>
-                <span style="color: white;" class="error">{{passError}}</span>
+                <span style="color: white;" class="error">{{error.password}}</span>
                 <br>
                 Repeatpassword <input type="password" name="txtRepassword" required>
-                <span style="color: white;" class="error">{{repassError}}</span>
-
-                <input type="submit" value="Register">
+                <span style="color: white;" class="error">{{error.repassword}}</span>
+                <div class="submit">
+                    <input type="submit" value="Register">
+                </div>
             </form>
-
-          
-        </div>
+        </div> --}}
     </center>
+    <center>
 
+        <form action="/doRegister" method="post">
+            <div class="mb-3">
+                <label for="exampleInputEmail1" class="form-label">UserName</label>
+                <input name="txtName" type="text" class="form-control" id="exampleInputEmail1"
+                    aria-describedby="emailHelp">
+                <span style="color: rgb(14, 13, 13); background: red;" class="error">{{error.username}}</span>
+            </div>
+            <div class="mb-3">
+                <label for="exampleInputPassword1" class="form-label">Password</label>
+                <input name="txtPassword" type="password" class="form-control" id="exampleInputPassword1">
+                <span style="color: rgb(14, 13, 13); background: red;" class="error">{{error.password}}</span>
+            </div>
+            <div class="mb-3">
+                <label for="exampleInputPassword1" class="form-label">Confirm Password</label>
+                <input name="txtRepassword" type="password" class="form-control" id="exampleInputPassword1">
+                <span style="color: rgb(14, 13, 13); background: red;" class="error">{{error.repassword}}</span>
+            </div>
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+    </center>
 </body>
 
 </html>

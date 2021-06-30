@@ -14,10 +14,10 @@
         <form action="/doInsert" method="post">
             <div class="form_insert">
                 Name <input type="text" name="txtName" placeholder="Enter Dish Name..." required>
-                <span style="color: white;" class="error">{{nameError}}</span>
+                <span style="color: white;" class="error">{{error.name}}</span>
                 <br>
                 Price <input type="text" name="txtPrice" placeholder="Enter Dish Price..." required>
-                <span style="color: white;" class="error">{{priceError}}
+                <span style="color: white;" class="error">{{error.price}}
                 <br>
                 <input type="submit" value="Insert">
             </div>

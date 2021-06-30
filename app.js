@@ -104,17 +104,27 @@ app.get('/view',async (req,res)=>{
 })
 
 app.post('/doInsert', async (req,res)=>{
+    let error = [];
+    let flag = true;
     const nameInput = req.body.txtName;
     const priceInput = req.body.txtPrice;
     var newProduct = {name:nameInput, price:priceInput, size : {dai:20, rong:40}}
     if(!dbHandler.checkName(nameInput))
     {
-        res.render('insert',{nameError:'Please Enter Name Again!'})
-    }else if(dbHandler.checkPrice(priceInput)){
-        res.render('insert',{priceError:'Please Enter Price Again!'})
-    }else{  
+        error["name"] = 'Please Enter Name Again!'
+        flag = false;
+     //   res.render('insert',{nameError:'Please Enter Name Again!'})
+    }if(dbHandler.checkPrice(priceInput)){
+        error["price"] = 'Please Enter price Again!'
+        flag = false;
+        //res.render('insert',{priceError:'Please Enter Price Again!'})
+    }if(flag == true){
         await dbHandler.insertOneIntoCollection(newProduct,"Product");
         res.render('logined')
+    }
+    else{  
+        // await dbHandler.insertOneIntoCollection(newProduct,"Product");
+        res.render('insert',{error:error})
     }
 })
 
@@ -127,20 +137,31 @@ app.get('/register',(req,res)=>{
 })
 
 app.post('/doRegister', async(req,res)=>{
+    let error = [];
+    let flag = true;
     const nameInput = req.body.txtName;
     const passInput = req.body.txtPassword;
     const repassInput = req.body.txtRepeatpassword;
     const newUser = {username:nameInput,password:passInput,Repeatpassword:repassInput};
     if(nameInput.length < 6)
     {
-        res.render('register',{nameError:'Username have to from 6 characters'})
+        error["username"] = 'Username have to from 6 characters'
+        flag = false
+        //res.render('register',{nameError:'Username have to from 6 characters'})
     }
-    else if(passInput.length < 6)
+    if(passInput.length < 6)
     {
-        res.render('register',{passError:'Password have to from 6 characters'})
+        error["password"] = 'Password have to from 6 characters'
+        flag = false
+       // res.render('register',{passError:'Password have to from 6 characters'})
     }
-    else if(repassInput !== passInput){
-       res.render('register',{repassError:'Password do not look like'})
+    if(repassInput !== passInput){
+        error["repassword"] = 'Password does not look like'
+        flag = false
+      // res.render('register',{repassError:'Password do not look like'})
+    }
+    if(flag == false){
+        res.render('register', {error:error})
     }
     else
     {  
