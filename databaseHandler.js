@@ -43,6 +43,15 @@ function checkName(value)
     return true;
 }
 
+function checkPrice(value)
+{
+   if(isNaN(value))
+   {
+       return true;
+   }
+    return false;
+}
 
 
-module.exports = {searchProduct, insertOneIntoCollection, checkUser, checkName}
+
+module.exports = {searchProduct, insertOneIntoCollection, checkUser, checkName, checkPrice}

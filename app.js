@@ -23,26 +23,26 @@ app.use(express.static('public'))
 var listNotToDelete = ['polo', 'pants', 'kitchen', 'noodles'];
 
 const dbHandler = require('./databaseHandler');
-const { check, validationResult } = require('express-validator');
+// const { check, validationResult } = require('express-validator');
 
-const validator = [
-    check('txtName').exists().withMessage('Please Enter UserName')
-    .notEmpty().withMessage('Username cannot be left blank')
-    .isLength({min: 6}).withMessage('Username have to from 6 characters'),
+// const validator = [
+//     check('txtName').exists().withMessage('Please Enter UserName')
+//     .notEmpty().withMessage('Username cannot be left blank')
+//     .isLength({min: 6}).withMessage('Username have to from 6 characters'),
 
-    check('txtPassword').exists().withMessage('Please Enter Password')
-    .notEmpty().withMessage('Password cannot be left blank')
-    .isLength({min: 6}).withMessage('Password have to from 6 characters'),
+//     check('txtPassword').exists().withMessage('Please Enter Password')
+//     .notEmpty().withMessage('Password cannot be left blank')
+//     .isLength({min: 6}).withMessage('Password have to from 6 characters'),
 
-    check('txtRepassword').exists().withMessage('Please Enter Password')
-    .notEmpty().withMessage('Password cannot be left blank')
-    .custom((value, {req})=> {
-    if(value !== req.body.txtPassword){
-                throw new Error('Password do not look like')
-    }
-        return true;
-    })
-]
+//     check('txtRepassword').exists().withMessage('Please Enter Password')
+//     .notEmpty().withMessage('Password cannot be left blank')
+//     .custom((value, {req})=> {
+//     if(value !== req.body.txtPassword){
+//                 throw new Error('Password do not look like')
+//     }
+//         return true;
+//     })
+// ]
 
 //search accurate 
 app.post('/search' ,async (req,res)=>{
@@ -110,7 +110,7 @@ app.post('/doInsert', async (req,res)=>{
     if(!dbHandler.checkName(nameInput))
     {
         res.render('insert',{nameError:'Please Enter Name Again!'})
-    }else if(dbHandler.checkName(priceInput)){
+    }else if(dbHandler.checkPrice(priceInput)){
         res.render('insert',{priceError:'Please Enter Price Again!'})
     }else{  
         await dbHandler.insertOneIntoCollection(newProduct,"Product");
@@ -126,7 +126,7 @@ app.get('/register',(req,res)=>{
     res.render('register')
 })
 
-app.post('/doRegister', validator, async(req,res)=>{
+app.post('/doRegister', async(req,res)=>{
     const nameInput = req.body.txtName;
     const passInput = req.body.txtPassword;
     const repassInput = req.body.txtRepeatpassword;
